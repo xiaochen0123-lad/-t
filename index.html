@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>有声相册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        body {
+            background: #fdfbfb;
+            color: #333;
+            padding-bottom: 60px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: #222;
+        }
+
+        .desc {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+        }
+
+        .carousel img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: none;
+        }
+
+        .carousel img.active {
+            display: block;
+        }
+
+        .video-box {
+            width: 100%;
+            margin: 40px 0;
+        }
+
+        .video-box h3 {
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        video {
+            width: 100%;
+            max-height: 500px;
+            border-radius: 12px;
+            outline: none;
+        }
+
+        .music-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        #playBtn {
+            padding: 10px 26px;
+            border: none;
+            background: #ff5e85;
+            color: #fff;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #playBtn:hover {
+            background: #ff3366;
+        }
+
+        .music-name {
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title">美好回忆 · 有声相册</h1>
+        <p class="desc">回应</p >
+
+        <div class="carousel" id="carousel">
+           <img src="a1.png" alt="">
+        </div>
+
+        <div class="music-control">
+            <button id="playBtn">播放背景音乐</button>
+            <span class="music-name">温馨BGM</span>
+        </div>
+
+        <div class="video-box">
+            <h3>精彩瞬间视频</h3>
+            <video controls>
+                <source src="a1.mp4" type="">
+            </video>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="a1.mp3" type="audio/mpeg">
+    
+
+    <script>
+        const imgs = document.querySelectorAll('#carousel img');
+        let idx = 0;
+        function playSlide() {
+            imgs.forEach(i => i.classList.remove('active'));
+            imgs[idx].classList.add('active');
+            idx = (idx + 1) % imgs.length;
+        }
+        setInterval(playSlide, 3000);
+
+        const bgMusic = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('playBtn');
+        let isPlay = false;
+
+        playBtn.onclick = () => {
+            if (!isPlay) {
+                bgMusic.play();
+                playBtn.textContent = '暂停音乐';
+                isPlay = true;
+            } else {
+                bgMusic.pause();
+                playBtn.textContent = '播放背景音乐';
+                isPlay = false;
+            }
+        };
+    </script>
+</body>
+</html>
